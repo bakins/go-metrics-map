@@ -14,6 +14,7 @@ type MapSink struct {
 	Data map[string]float32
 }
 
+// New initializes a new MapSink
 func New() *MapSink {
 	s := &MapSink{
 		Data: make(map[string]float32),
@@ -36,7 +37,7 @@ func (s *MapSink) FlattenKey(parts []string) string {
 	}, joined)
 }
 
-// SetGuage sets the flattend key to the value.
+// SetGauge sets the flattend key to the value.
 func (s *MapSink) SetGauge(key []string, val float32) {
 	flatKey := s.FlattenKey(key)
 	s.Lock()
@@ -66,6 +67,7 @@ func (s *MapSink) AddSample(key []string, val float32) {
 
 }
 
+// MarshalJSON marshals the sinks data into json
 func (s *MapSink) MarshalJSON() ([]byte, error) {
 	s.Lock()
 	defer s.Unlock()
