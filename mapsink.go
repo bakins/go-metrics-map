@@ -62,9 +62,9 @@ func (s *MapSink) IncrCounter(key []string, val float32) {
 	s.Unlock()
 }
 
-// AddSample does nothing.  Timings are not supported.
+// AddSample just adds the sampls to all other samples. It acts like a counter in that regard.
 func (s *MapSink) AddSample(key []string, val float32) {
-
+	s.IncrCounter(key, val)
 }
 
 // MarshalJSON marshals the sinks data into json
